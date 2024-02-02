@@ -1,4 +1,4 @@
-package loaderrr
+package logrus
 
 import "fmt"
 
